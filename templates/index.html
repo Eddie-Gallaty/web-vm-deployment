@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ mytitle }}</title>
+</head>
+<body>
+    <h1> {{ mytitle }} </h1>
+    <h2> select the vm from drop down</h2>
+    <ul> 
+        {% for vm in getvms %}
+        <li> {{ vm }} </li>
+        {% endfor %}
+    </ul>
+    <label for="vms"> </label>
+    <select name="Test">
+        {% for vm in getvms %}
+            <option value="{{ vm }}"> {{ vm }} </option>
+        {% endfor %}
+    </select>
