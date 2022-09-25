@@ -1,11 +1,11 @@
 from cgi import test
 from inspect import ClosureVars
 from flask import Flask, render_template
-from vminfo import VMinfo
+from vminfo import Vminfo
 
 app = Flask(__name__)
 #new vminfo object
-vminfo = VMinfo()
+vminfo = Vminfo()
 
 #  get folders and clusters list
 folders = vminfo.get_folders()
