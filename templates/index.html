@@ -6,15 +6,40 @@
 </head>
 <body>
     <h1> {{ mytitle }} </h1>
-    <h2> select the vm from drop down</h2>
-    <ul> 
-        {% for vm in getvms %}
-        <li> {{ vm }} </li>
+    <h2> Select the vm folder </h2>
+    <!--
+        {% for folder in folders %}
+        <li> {{ folder }} </li>
         {% endfor %}
-    </ul>
-    <label for="vms"> </label>
-    <select name="Test">
-        {% for vm in getvms %}
-            <option value="{{ vm }}"> {{ vm }} </option>
+    -->
+    <label for="folders"> </label>
+    <select name="Folders">
+        <option value="Default" selected> Select Folder </option>
+        {% for folder in folders %}
+            <option value="{{ folder }}"> {{ folder }} </option>
+        {% endfor %}
+    </select>
+    <h2> Select the cluster </h2>
+    <label for="clusters"> </label>
+    <select name="Clusters">
+        <option value="Default" selected> Select Cluster </option>
+        {% for cluster in clusters %}
+            <option value="{{ cluster }}"> {{ cluster }} </option>
+        {% endfor %}
+    </select>
+    <h2> Select the datastore </h2>
+    <label for="datastores"> </label>
+    <select name="Datastores">
+        <option value="Default" selected> Select Datastore </option>
+        {% for datastore in datastores %}
+            <option value="{{ datastore }}"> {{ datastore }} </option>
+        {% endfor %}
+    </select>
+    <h2> Select the network </h2>
+    <label for="networks"> </label>
+    <select name="Networks">
+        <option value="Default" selected> Select Network </option>
+        {% for network in networks %}
+            <option value="{{ network }}"> {{ network }} </option>
         {% endfor %}
     </select>
