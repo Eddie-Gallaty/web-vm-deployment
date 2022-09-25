@@ -15,7 +15,7 @@ vsphere_client = create_vsphere_client(server='', username='', password='', sess
 #  **RESEARCH THIS!*** var for  disable warning for insecure request warnings ** This is not recommended in a production environment.**
 #urllibvar = urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-class VM():
+class VMinfo():
     def __init__(self):
         pass
     
