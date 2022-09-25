@@ -1,9 +1,7 @@
-from operator import ne
 import requests
 import urllib3
 from pprint import pprint
 from vmware.vapi.vsphere.client import create_vsphere_client
-import com.vmware.vcenter.inventory_client
 
 # request to create a session
 session = requests.session()
