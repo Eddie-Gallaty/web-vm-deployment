@@ -5,7 +5,6 @@ from vmware.vapi.vsphere.client import create_vsphere_client
 
 # request to create a session
 session = requests.session()
-
 # ****research what this is actually doing
 session.verify = False
 
