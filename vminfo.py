@@ -2,6 +2,7 @@ import requests
 import urllib3
 from pprint import pprint
 from vmware.vapi.vsphere.client import create_vsphere_client
+from pyVim.connect import SmartConnect, Disconnect
 
 # request to create a session
 session = requests.session()
@@ -49,3 +50,9 @@ class Vminfo():
         for network in list_of_networks:
             networks.append(network.name)
         return networks
+
+    def create_vm_folder(self, host, un, pw):
+        si = SmartConnect(host=host, user=un, pwd=pw, port=443, disableSslCertValidation = True)
+        dc = si.content.rootFolder.childEntity[0]
+        dc.vmFolder.CreateFolder("TestEGDev2")
+        Disconnect(si)
