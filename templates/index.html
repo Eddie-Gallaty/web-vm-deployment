@@ -12,7 +12,7 @@
         <input type="text" name="username"> <br /> <br />
         enter PW:<br />
         <input type="text" name="password"><br /> <br />
-        <input type="submit" value="submit">
+        <input type="submit" name="submit">
     <h1> {{ mytitle }} </h1>
     <h2> Select the vm folder </h2>
     <!--
@@ -27,6 +27,15 @@
             <option value="{{ folder }}"> {{ folder }} </option>
         {% endfor %}
     </select>
+    <br />
+    <br />
+    <br />
+    <br />
+    <h2> Create new folder (if needed)</h2>
+    <form action="/" method="post">
+        <input type="text" id="new_folder" name="new_folder"> <br />
+        <input type="submit" name="create_folder">
+    </form>
     <h2> Select the cluster </h2>
     <label for="clusters"> </label>
     <select name="Clusters">
@@ -44,12 +53,16 @@
         {% endfor %}
     </select>
     <h2> Select the network </h2>
-    <label for="networks"> </label>
-    <select name="Networks">
+    <form action="/" method="post">
+        <label for="networks"> </label>
+        <select id= "Networks" name="Networks">
         <option value="Default" selected> Select Network </option>
         {% for network in networks %}
             <option value="{{ network }}"> {{ network }} </option>
         {% endfor %}
-    </select>
+        </select>
+        <input type="submit" name="add">
+    </form>
+
 </body>
 </html>
