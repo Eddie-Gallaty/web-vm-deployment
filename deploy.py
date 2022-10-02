@@ -2,7 +2,7 @@ from cgi import test
 import dis
 from inspect import ClosureVars
 from flask import Flask, render_template, request
-from vminfoT import Vminfo
+from vminfo import Vminfo
 from pyVim.connect import SmartConnect, Disconnect
 
 
@@ -25,7 +25,7 @@ def index():
             clusters = vminfo.get_clusters(vcenter_name, username, password)
             datastores = vminfo.get_datastores(vcenter_name,username, password)
             networks = vminfo.get_networks(vcenter_name, username, password)
-            return render_template("/index.html", mytitle='Hello World!', folders=folders, clusters=clusters, datastores=datastores, networks=networks)
+            return render_template("/index.jinja", mytitle='Hello World!', folders=folders, clusters=clusters, datastores=datastores, networks=networks)
         elif 'add' in request.form:
             #this is testing passing input from textbox to variables
             print(network_select)
@@ -33,4 +33,4 @@ def index():
             #create new folder
             vminfo.create_vm_folder(vcenter_name, username, password, create_folder)
 
-    return render_template("/index.html", mytitle='Hello World!')
+    return render_template("/index.jinja", mytitle='Hello World!')
