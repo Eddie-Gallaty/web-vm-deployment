@@ -5,6 +5,7 @@ from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.vcenter_client import (Folder)
 from pyVmomi import vim, vmodl
 from pyVim.connect import SmartConnect, Disconnect
+
 # request to create a session
 session = requests.session()
 # ****research what this is actually doing***** Disable cert verification for demo purpose. This is not recommended in a production environment!!!
@@ -32,7 +33,7 @@ class Vminfo():
             
     def get_objs(self, si, vimtype, recursive):
         """
-        Get the vsphere object associated with a given text name
+        Get the vsphere object specified and return a list 
         """
         obj = []
         container = si.content.rootFolder #starting point to look into
