@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ mytitle }}</title>
+</head>
+<body>
+    <form action="/" method="post">
+        enter vcenter name:<br />
+        <input type="text" id="vcentername" name="vcentername"> <br /><br />
+        enter username:<br />
+        <input type="text" name="username"> <br /> <br />
+        enter PW:<br />
+        <input type="text" name="password"><br /> <br />
+        <input type="submit" name="submit">
+    </form>
+    <h1> {{ mytitle }} </h1>
+    <!--
+        {% for folder in folders %}
+        <li> {{ folder }} </li>
+        {% endfor %}
+    -->
+    <h2> Select the Template </h2>
+    <label for="templates"></label>
+    <select id="templates" name="templates">
+        <option value="Default" selected> Select Template </option>
+        {% for template in templates %}
+            <option value="{{ template}}"> {{ template }} </option>
+        {% endfor %}
+    </select>
+    <button onclick="addTemplate()">Add Template</button>
+    <h2> Select the vm folder </h2>
+    <label for="folders"> </label>
+    <select id="folders", name="folders">
+        <option value="Default" selected> Select Folder </option>
+        {% for folder in folders %}
+            <option value="{{ folder }}"> {{ folder }} </option>
+        {% endfor %}
+    </select>
+    <button onclick="addfolder()">Add Folder</button>
+    <br />
+    <br />
+    <h2> Create new folder (if needed)</h2>
+    <form action="/" method="post">
+        <input type="text" id="new_folder" name="new_folder"> <br />
+        <input type="submit" name="create_folder">
+    </form>
+    <h2> Select the cluster </h2>
+    <label for="clusters"> </label>
+    <select id="clusters", name="clusters">
+        <option value="Default" selected> Select Cluster </option>
+        {% for cluster in clusters %}
+            <option value="{{ cluster }}"> {{ cluster }} </option>
+        {% endfor %}
+    </select>
+    <button onclick="addCluster()">Add Cluster</button>
+    <h2> Select the Datastore Cluster </h2>
+    <label for="datastore_clusters"></label>
+    <select id="datastore_clusters", name="datastore_clusters">
+        <option value="Default" selected> Select Datastore Cluster </option>
+        {% for dsc in datastore_cluster %}
+            <option value="{{ dsc }}"> {{ dsc }} </option>
+        {% endfor %}
+    </select>
+    <button onclick="addDataStoreCluster()">Add Datastore Cluster</button>    
+    <h2> Select the datastore </h2>
+    <label for="datastores"> </label>
+    <select id="datastores", name="datastores">
+        <option value="Default" selected> Select Datastore </option>
+        {% for datastore in datastores %}
+            <option value="{{ datastore }}"> {{ datastore }} </option>
+        {% endfor %}
+    </select>
+    <button onclick="addDatastore()">Add Datastore Cluster</button>
+    <h2> Select the network </h2>
+    <form action="/" method="post">
+        <label for="networks"> </label>
+        <select id= "networks", name="networks">
+        <option value="Default" selected> Select Network </option>
+        {% for network in networks %}
+            <option value="{{ network }}"> {{ network }} </option>
+        {% endfor %}
+        </select>
+    </form>
+    <button onclick="addNetwork()">Add Network</button>
+    <h2> Deploy VM </h2>
+    <form action ="/" method="post">
+        <label for="deploy"> </label>
+        <select id="deployvm", name="deployvm">
+        </select>
+
+    </form>
+   <!-- <p id="test"></p> -->
+    <script>
+    let x = 5;
+    let y = 6
+    let z = x * y
+    function addTemplate(){
+        var select = document.getElementById('templates');
+        var text = select.options[select.selectedIndex].text;
+        var option = document.createElement("option");
+        option.text = text;
+        //console.log(text)
+        var selectTemp = document.getElementById('deployvm');
+        if (text !== ""){
+            selectTemp.appendChild(option);
+            text = "";
+            
+
+        }
+        else{
+            console.log("Template text reset")
+        }
+        
+    }
+    function addfolder(){
+        var select = document.getElementById('folders');
+        var text = select.options[select.selectedIndex].text;
+        console.log(text)        
+    }
+    function addCluster(){
+        var select = document.getElementById('clusters');
+        var text = select.options[select.selectedIndex].text;
+        console.log(text)        
+    }
+    function addDataStoreCluster(){
+        var select = document.getElementById('datastore_clusters');
+        var text = select.options[select.selectedIndex].text;
+        console.log(text)        
+    }
+    function addDatastore(){
+        var select = document.getElementById('datastores');
+        var text = select.options[select.selectedIndex].text;
+        console.log(text)        
+    }
+    function addNetwork(){
+        var select = document.getElementById('networks');
+        var text = select.options[select.selectedIndex].text;
+        console.log(text)
+    }
+    </script>
+</body>
+</html>
