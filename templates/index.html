@@ -28,7 +28,7 @@
             <option value="{{ template}}"> {{ template }} </option>
         {% endfor %}
     </select>
-    <button onclick="addvmSpec()">Add Template</button>
+    <button onclick="addvmSpec(1)">Add Template</button>
     <h2> Select the vm folder </h2>
     <label for="folders"> </label>
     <select id="folders", name="folders">
@@ -37,7 +37,7 @@
             <option value="{{ folder }}"> {{ folder }} </option>
         {% endfor %}
     </select>
-    <button onclick="addvmSpec()">Add Folder</button>
+    <button onclick="addvmSpec(2)">Add Folder</button>
     <br />
     <br />
     <h2> Create new folder (if needed)</h2>
@@ -53,7 +53,7 @@
             <option value="{{ cluster }}"> {{ cluster }} </option>
         {% endfor %}
     </select>
-    <button onclick="addCluster()">Add Cluster</button>
+    <button onclick="addvmSpec(3)">Add Cluster</button>
     <h2> Select the Datastore Cluster </h2>
     <label for="datastore_clusters"></label>
     <select id="datastore_clusters", name="datastore_clusters">
@@ -62,7 +62,7 @@
             <option value="{{ dsc }}"> {{ dsc }} </option>
         {% endfor %}
     </select>
-    <button onclick="addDataStoreCluster()">Add Datastore Cluster</button>    
+    <button onclick="addvmSpec(4)">Add Datastore Cluster</button>    
     <h2> Select the datastore </h2>
     <label for="datastores"> </label>
     <select id="datastores", name="datastores">
@@ -71,18 +71,16 @@
             <option value="{{ datastore }}"> {{ datastore }} </option>
         {% endfor %}
     </select>
-    <button onclick="addDatastore()">Add Datastore Cluster</button>
+    <button onclick="addvmSpec(5)">Add Datastore</button>
     <h2> Select the network </h2>
-    <form action="/" method="post">
-        <label for="networks"> </label>
-        <select id= "networks", name="networks">
+    <label for="networks"> </label>
+    <select id= "networks", name="networks">
         <option value="Default" selected> Select Network </option>
         {% for network in networks %}
             <option value="{{ network }}"> {{ network }} </option>
         {% endfor %}
-        </select>
-    </form>
-    <button onclick="addNetwork()">Add Network</button>
+    </select>
+    <button onclick="addvmSpec(6)">Add Network</button>
     <h2> Deploy VM </h2>
     <form action ="/" method="post">
         <label for="deploy"> </label>
@@ -95,63 +93,78 @@
     let x = 5;
     let y = 6;
     let z = x * y;
+    var temp = "";
+    var folder = "";
+    var cluster = "";
+    var dsc = "";
+    var ds = "";
+    var network = "";
     var tempText = "";
     var folderText = "";
-    function addvmSpec(){
+    var clusText = "";
+    var dscText = "";
+    var dsText = "";
+    var netText = "";
+    function addvmSpec(result){
         var selectTemp = document.getElementById('templates');
         var selectFolder = document.getElementById('folders');
+        var selectClust = document.getElementById('clusters');
+        var selectDsc = document.getElementById('datastore_clusters');
+        var selectDs = document.getElementById('datastores');
+        var selectNetwork = document.getElementById('networks');
         var deployVM = document.getElementById('deployvm');
-        if (tempText == ""){
+        if (result == 1 && tempText == ""){
             tempText = selectTemp.options[selectTemp.selectedIndex].text;
             var option = document.createElement('option');
             //option.setAttribute("id", "template");
             option.text = tempText;
             deployVM.appendChild(option);
-            var temp = {"template": option.value}
+            temp = {"template": option.value}
             //text = "";
         }
-        if (folderText == ""){
+        if (result == 2 && folderText == ""){
             folderText = selectFolder.options[selectFolder.selectedIndex].text;
             var option = document.createElement('option');
             option.text = folderText;
             deployVM.appendChild(option);
-            var folders = {"folder": option.value};
+            folder = {"folder": option.value};
+        }
+        if (result == 3 && clusText == ""){
+            clusText = selectClust.options[selectClust.selectedIndex].text
+            var option = document.createElement('option');
+            option.text = clusText;
+            deployVM.appendChild(option);
+            cluster = {"cluster": option.value};
+        }
+        if(result == 4 && dscText == ""){
+            dscText = selectDsc.options[selectDsc.selectedIndex].text;
+            var option = document.createElement('option');
+            option.text = dscText;
+            deployVM.appendChild(option);
+            dsc = {"dsc": option.value};
+        }
+        if(result == 5 && dsText == ""){
+            dsText = selectDs.options[selectDs.selectedIndex].text;
+            var option = document.createElement('option');
+            option.text = dsText;
+            deployVM.appendChild(option);
+            ds = {"ds": option.value};
+        }
+        if(result == 6 && netText == ""){
+            netText = selectNetwork.options[selectNetwork.selectedIndex].text;
+            var option = document.createElement('option');
+            option.text = netText;
+            deployVM.appendChild(option);
+            network = {"network": option.value};
         }
 
     //    else{
     //        console.log("Template text reset")
     //    }
         console.log(tempText);
-        console.log(folders)
+        console.log(folder)
         console.log(temp);
-        //console.log(temp.template);
-        
-    }
-    function addfolder(){
-        var select = document.getElementById('folders');
-        var text = select.options[select.selectedIndex].text;
-        console.log(text)        
-    }
-    function addCluster(){
-        var select = document.getElementById('clusters');
-        var text = select.options[select.selectedIndex].text;
-        console.log(text)        
-    }
-    function addDataStoreCluster(){
-        var select = document.getElementById('datastore_clusters');
-        var text = select.options[select.selectedIndex].text;
-        console.log(text)        
-    }
-    function addDatastore(){
-        var select = document.getElementById('datastores');
-        var text = select.options[select.selectedIndex].text;
-        console.log(text)        
-    }
-    function addNetwork(){
-        var select = document.getElementById('networks');
-        var text = select.options[select.selectedIndex].text;
-        console.log(text)
-    }
-    </script>
-</body>
-</html>
+        console.log(cluster);
+        console.log(dsc);
+        console.log(ds);
+        console.log(network);
