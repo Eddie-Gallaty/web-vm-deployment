@@ -28,7 +28,7 @@
             <option value="{{ template}}"> {{ template }} </option>
         {% endfor %}
     </select>
-    <button onclick="addTemplate()">Add Template</button>
+    <button onclick="addvmSpec()">Add Template</button>
     <h2> Select the vm folder </h2>
     <label for="folders"> </label>
     <select id="folders", name="folders">
@@ -37,7 +37,7 @@
             <option value="{{ folder }}"> {{ folder }} </option>
         {% endfor %}
     </select>
-    <button onclick="addfolder()">Add Folder</button>
+    <button onclick="addvmSpec()">Add Folder</button>
     <br />
     <br />
     <h2> Create new folder (if needed)</h2>
@@ -93,24 +93,38 @@
    <!-- <p id="test"></p> -->
     <script>
     let x = 5;
-    let y = 6
-    let z = x * y
-    function addTemplate(){
-        var select = document.getElementById('templates');
-        var text = select.options[select.selectedIndex].text;
-        var option = document.createElement("option");
-        option.text = text;
-        //console.log(text)
-        var selectTemp = document.getElementById('deployvm');
-        if (text !== ""){
-            selectTemp.appendChild(option);
-            text = "";
-            
+    let y = 6;
+    let z = x * y;
+    var tempText = "";
+    var folderText = "";
+    function addvmSpec(){
+        var selectTemp = document.getElementById('templates');
+        var selectFolder = document.getElementById('folders');
+        var deployVM = document.getElementById('deployvm');
+        if (tempText == ""){
+            tempText = selectTemp.options[selectTemp.selectedIndex].text;
+            var option = document.createElement('option');
+            //option.setAttribute("id", "template");
+            option.text = tempText;
+            deployVM.appendChild(option);
+            var temp = {"template": option.value}
+            //text = "";
+        }
+        if (folderText == ""){
+            folderText = selectFolder.options[selectFolder.selectedIndex].text;
+            var option = document.createElement('option');
+            option.text = folderText;
+            deployVM.appendChild(option);
+            var folders = {"folder": option.value};
+        }
 
-        }
-        else{
-            console.log("Template text reset")
-        }
+    //    else{
+    //        console.log("Template text reset")
+    //    }
+        console.log(tempText);
+        console.log(folders)
+        console.log(temp);
+        //console.log(temp.template);
         
     }
     function addfolder(){
