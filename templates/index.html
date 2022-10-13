@@ -5,7 +5,7 @@
     <title> {{ mytitle }}</title>
 </head>
 <body>
-    <form action="/" method="post">
+   <form action="/" method="post">
         enter vcenter name:<br />
         <input type="text" id="vcentername" name="vcentername"> <br /><br />
         enter username:<br />
@@ -41,10 +41,10 @@
     <br />
     <br />
     <h2> Create new folder (if needed)</h2>
-    <form action="/" method="post">
+    
         <input type="text" id="new_folder" name="new_folder"> <br />
         <input type="submit" name="create_folder">
-    </form>
+    <!---</form>--->
     <h2> Select the cluster </h2>
     <label for="clusters"> </label>
     <select id="clusters", name="clusters">
@@ -82,17 +82,15 @@
     </select>
     <button onclick="addvmSpec(6)">Add Network</button>
     <h2> Deploy VM </h2>
-    <form action ="/" method="post">
+    <form action="/" method="post">
         <label for="deploy"> </label>
         <select id="deployvm", name="deployvm">
         </select>
+        <input type="button" value="Submit" onclick="return loadXMLDoc()">
 
     </form>
    <!-- <p id="test"></p> -->
     <script>
-    let x = 5;
-    let y = 6;
-    let z = x * y;
     var temp = "";
     var folder = "";
     var cluster = "";
@@ -116,10 +114,9 @@
         if (result == 1 && tempText == ""){
             tempText = selectTemp.options[selectTemp.selectedIndex].text;
             var option = document.createElement('option');
-            //option.setAttribute("id", "template");
             option.text = tempText;
             deployVM.appendChild(option);
-            temp = {"template": option.value}
+            temp = option.value
             //text = "";
         }
         if (result == 2 && folderText == ""){
@@ -127,40 +124,38 @@
             var option = document.createElement('option');
             option.text = folderText;
             deployVM.appendChild(option);
-            folder = {"folder": option.value};
+            //folder = {"folder": option.value}; **KEEPING AS JSON REFERENCE!**
+            folder = option.value;
         }
         if (result == 3 && clusText == ""){
             clusText = selectClust.options[selectClust.selectedIndex].text
             var option = document.createElement('option');
             option.text = clusText;
             deployVM.appendChild(option);
-            cluster = {"cluster": option.value};
+            cluster = option.value;
         }
         if(result == 4 && dscText == ""){
             dscText = selectDsc.options[selectDsc.selectedIndex].text;
             var option = document.createElement('option');
             option.text = dscText;
             deployVM.appendChild(option);
-            dsc = {"dsc": option.value};
+            dsc = option.value;
         }
         if(result == 5 && dsText == ""){
             dsText = selectDs.options[selectDs.selectedIndex].text;
             var option = document.createElement('option');
             option.text = dsText;
             deployVM.appendChild(option);
-            ds = {"ds": option.value};
+            ds = option.value;
         }
         if(result == 6 && netText == ""){
             netText = selectNetwork.options[selectNetwork.selectedIndex].text;
             var option = document.createElement('option');
             option.text = netText;
             deployVM.appendChild(option);
-            network = {"network": option.value};
+            network = option.value;
         }
 
-    //    else{
-    //        console.log("Template text reset")
-    //    }
         console.log(tempText);
         console.log(folder)
         console.log(temp);
@@ -168,3 +163,20 @@
         console.log(dsc);
         console.log(ds);
         console.log(network);
+        //console.log(temp.template);        
+    }
+
+    //sending values to flask
+    function loadXMLDoc(){
+        var req = new XMLHttpRequest();
+        req.open('POST', '/');
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        var postVars = 'template='+temp+'&folder='+folder+'&cluster='+cluster+'&dsc='+dsc+'&ds='+ds+'&network='+network;
+        req.send(postVars)
+        
+        return false
+    }
+
+    </script>
+</body>
+</html>
