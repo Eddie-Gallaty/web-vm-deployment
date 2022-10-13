@@ -52,11 +52,12 @@ def index():
             cluster = request.form['cluster']
             dsc = request.form['dsc']
             ds = request.form['ds']
-            vm = "helloworldeg"
+            #Just for testing 
+            vm = ""
             network = request.form['network']
             print("hello world!")
             print(template, folder, cluster, dsc, ds, network)
-            # This is just for testing
+            # This is just for testing more to come
             vcenter_name = ""
             username = ""
             password = ""
